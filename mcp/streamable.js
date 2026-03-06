@@ -43,7 +43,8 @@ app.post("/mcp", async (req, res) => {
     transport = new StreamableHTTPServerTransport({
       sessionIdGenerator: () => randomUUID(),
       onsessioninitialized: (sessionId) => {
-        // Store the transport by session ID
+        // Store the transport by session ID and on the transport for cleanup
+        transport.sessionId = sessionId;
         transports[sessionId] = transport;
       },
       // DNS rebinding protection is disabled for MCP Inspector compatibility
