@@ -1,6 +1,8 @@
 # Dependencies
 node_modules/
 
+mcp/node_modules/
+
 # Environment variables
 .env
 .env.local
@@ -17,3 +19,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Scratch / dev notes (may contain secrets)
+scratch

@@ -57,28 +57,13 @@ export default function apiBasedTools(server) {
           .enum(["not_started", "in_progress", "done"])
           .optional()
           .describe("Filter by status"),
-        assigned_user_id: z
-          .string()
-          .optional()
-          .describe("Filter by assigned user ID"),
+        assigned_user_id: z.string().optional().describe("Filter by assigned user ID"),
         tag_ids: z.string().optional().describe("Comma-separated tag IDs"),
-        search: z
-          .string()
-          .optional()
-          .describe("Search in title and description"),
+        search: z.string().optional().describe("Search in title and description"),
         page: z.number().optional().describe("Page number (default: 1)"),
-        limit: z
-          .number()
-          .optional()
-          .describe("Items per page (default: 10, max: 100)"),
-        priority: z
-          .enum(["low", "medium", "high"])
-          .optional()
-          .describe("Filter by priority"),
-        created_by_user_id: z
-          .string()
-          .optional()
-          .describe("Filter by creator user ID"),
+        limit: z.number().optional().describe("Items per page (default: 10, max: 100)"),
+        priority: z.enum(["low", "medium", "high"]).optional().describe("Filter by priority"),
+        created_by_user_id: z.string().optional().describe("Filter by creator user ID"),
         apiKey: z.string().describe("API key for authentication"),
       },
     },
@@ -108,7 +93,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   server.registerTool(
@@ -119,14 +104,8 @@ export default function apiBasedTools(server) {
       inputSchema: {
         title: z.string().describe("Issue title"),
         description: z.string().optional().describe("Issue description"),
-        status: z
-          .enum(["not_started", "in_progress", "done"])
-          .optional()
-          .describe("Issue status"),
-        priority: z
-          .enum(["low", "medium", "high", "urgent"])
-          .optional()
-          .describe("Issue priority"),
+        status: z.enum(["not_started", "in_progress", "done"]).optional().describe("Issue status"),
+        priority: z.enum(["low", "medium", "high", "urgent"]).optional().describe("Issue priority"),
         assigned_user_id: z.string().optional().describe("Assigned user ID"),
         tag_ids: z.array(z.number()).optional().describe("Array of tag IDs"),
         apiKey: z.string().describe("API key for authentication"),
@@ -135,12 +114,9 @@ export default function apiBasedTools(server) {
     async (params) => {
       const { apiKey, ...issueData } = params;
 
-      const result = await makeRequest(
-        "POST",
-        `${API_BASE_URL}/issues`,
-        issueData,
-        { headers: { "x-api-key": apiKey } }
-      );
+      const result = await makeRequest("POST", `${API_BASE_URL}/issues`, issueData, {
+        headers: { "x-api-key": apiKey },
+      });
 
       return {
         content: [
@@ -150,7 +126,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   server.registerTool(
@@ -164,12 +140,9 @@ export default function apiBasedTools(server) {
       },
     },
     async ({ id, apiKey }) => {
-      const result = await makeRequest(
-        "GET",
-        `${API_BASE_URL}/issues/${id}`,
-        null,
-        { headers: { "x-api-key": apiKey } }
-      );
+      const result = await makeRequest("GET", `${API_BASE_URL}/issues/${id}`, null, {
+        headers: { "x-api-key": apiKey },
+      });
 
       return {
         content: [
@@ -179,7 +152,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   server.registerTool(
@@ -191,14 +164,8 @@ export default function apiBasedTools(server) {
         id: z.number().describe("Issue ID"),
         title: z.string().optional().describe("Issue title"),
         description: z.string().optional().describe("Issue description"),
-        status: z
-          .enum(["not_started", "in_progress", "done"])
-          .optional()
-          .describe("Issue status"),
-        priority: z
-          .enum(["low", "medium", "high"])
-          .optional()
-          .describe("Issue priority"),
+        status: z.enum(["not_started", "in_progress", "done"]).optional().describe("Issue status"),
+        priority: z.enum(["low", "medium", "high"]).optional().describe("Issue priority"),
         assigned_user_id: z.string().optional().describe("Assigned user ID"),
         tag_ids: z.array(z.number()).optional().describe("Array of tag IDs"),
         apiKey: z.string().describe("API key for authentication"),
@@ -207,12 +174,9 @@ export default function apiBasedTools(server) {
     async (params) => {
       const { id, apiKey, ...updateData } = params;
 
-      const result = await makeRequest(
-        "PUT",
-        `${API_BASE_URL}/issues/${id}`,
-        updateData,
-        { headers: { "x-api-key": apiKey } }
-      );
+      const result = await makeRequest("PUT", `${API_BASE_URL}/issues/${id}`, updateData, {
+        headers: { "x-api-key": apiKey },
+      });
 
       return {
         content: [
@@ -222,7 +186,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   server.registerTool(
@@ -236,12 +200,9 @@ export default function apiBasedTools(server) {
       },
     },
     async ({ id, apiKey }) => {
-      const result = await makeRequest(
-        "DELETE",
-        `${API_BASE_URL}/issues/${id}`,
-        null,
-        { headers: { "x-api-key": apiKey } }
-      );
+      const result = await makeRequest("DELETE", `${API_BASE_URL}/issues/${id}`, null, {
+        headers: { "x-api-key": apiKey },
+      });
 
       return {
         content: [
@@ -251,7 +212,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   // Tags Tools
@@ -278,7 +239,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   server.registerTool(
@@ -295,12 +256,9 @@ export default function apiBasedTools(server) {
     async (params) => {
       const { apiKey, ...tagData } = params;
 
-      const result = await makeRequest(
-        "POST",
-        `${API_BASE_URL}/tags`,
-        tagData,
-        { headers: { "x-api-key": apiKey } }
-      );
+      const result = await makeRequest("POST", `${API_BASE_URL}/tags`, tagData, {
+        headers: { "x-api-key": apiKey },
+      });
 
       return {
         content: [
@@ -310,7 +268,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   server.registerTool(
@@ -324,12 +282,9 @@ export default function apiBasedTools(server) {
       },
     },
     async ({ id, apiKey }) => {
-      const result = await makeRequest(
-        "DELETE",
-        `${API_BASE_URL}/tags/${id}`,
-        null,
-        { headers: { "x-api-key": apiKey } }
-      );
+      const result = await makeRequest("DELETE", `${API_BASE_URL}/tags/${id}`, null, {
+        headers: { "x-api-key": apiKey },
+      });
 
       return {
         content: [
@@ -339,7 +294,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   // Users Tools
@@ -366,7 +321,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   // API Key Tools
@@ -381,11 +336,9 @@ export default function apiBasedTools(server) {
       },
     },
     async ({ apiKey }) => {
-      const result = await makeRequest(
-        "POST",
-        `${API_BASE_URL}/auth/api-key/verify`,
-        { key: apiKey }
-      );
+      const result = await makeRequest("POST", `${API_BASE_URL}/auth/api-key/verify`, {
+        key: apiKey,
+      });
 
       return {
         content: [
@@ -395,7 +348,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   // Health Check Tools
@@ -407,10 +360,7 @@ export default function apiBasedTools(server) {
       description: "Get the health status of the API",
     },
     async () => {
-      const result = await makeRequest(
-        "GET",
-        `${API_BASE_URL.replace("/api", "")}/health`
-      );
+      const result = await makeRequest("GET", `${API_BASE_URL.replace("/api", "")}/health`);
 
       return {
         content: [
@@ -420,7 +370,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   server.registerTool(
@@ -430,10 +380,7 @@ export default function apiBasedTools(server) {
       description: "Check if the API is ready to serve requests",
     },
     async () => {
-      const result = await makeRequest(
-        "GET",
-        `${API_BASE_URL.replace("/api", "")}/health/ready`
-      );
+      const result = await makeRequest("GET", `${API_BASE_URL.replace("/api", "")}/health/ready`);
 
       return {
         content: [
@@ -443,7 +390,7 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 
   server.registerTool(
@@ -453,10 +400,7 @@ export default function apiBasedTools(server) {
       description: "Check if the API is alive",
     },
     async () => {
-      const result = await makeRequest(
-        "GET",
-        `${API_BASE_URL.replace("/api", "")}/health/live`
-      );
+      const result = await makeRequest("GET", `${API_BASE_URL.replace("/api", "")}/health/live`);
 
       return {
         content: [
@@ -466,6 +410,6 @@ export default function apiBasedTools(server) {
           },
         ],
       };
-    }
+    },
   );
 }
