@@ -27,3 +27,7 @@ Thumbs.db
 # Logs
 logs/
 *.log
+
+# Database
+database.sqlite
+*.sqlite-journal
