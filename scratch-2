@@ -1,0 +1,28 @@
+// mcp-issue-tracker
+
+//Terminal open during dev work
+parvezkose@MacBook-Pro-4 mcp % npx @modelcontextprotocol/inspector
+parvezkose@MacBook-Pro-4 mcp % node streamable.js
+parvezkose@MacBook-Pro-4 todoer % npm run dev
+Local: http://localhost:5173/
+
+//
+Moved taskr app project created using claude code vibe coding out of this project
+
+// Copy API Key from http://localhost:5173/issues
+
+Create a new issue in my issue tracker that says to add google login to my app, mark it as in-progress, and mark it medium priority. Here is my API key: <>
+
+Create a new issue for me, assign to the admin user, mark it as a bug and a feature request and a auth isssue, mark it as urgent.
+I want to add GitHub as an auth provider. Add step-by-step instructions to the issue description on how to do it. Here is my API key: <>
+
+create a feature request to add dark mode to the admin app. fill it out with a very convincing monolog about the dangers of white light in your eyes and how dark mode is the singular path to glory. Here is my API key:
+<>
+
+claude mcp add-json github '{"type":"http","url":"https://api.githubcopilot.com/mcp","headers":{"Authorization":"Bearer <>"}}'
+
+Use playwright to make sure the signup and login works okay
+
+File a github issue to implement dark mode theme
+
+Okay, now go fulfil issue #1 from github and open a pull request and share the PR URL for me to review and approve
